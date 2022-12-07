@@ -1,0 +1,19 @@
+Day 0:
+	Group 1 is ready to reproduce
+	Group 0 reproduced adding no new fish to group 2
+Day 1:
+	Group 2 is ready to reproduce
+	Group 1 reproduced adding 1 new fish to group 3
+	New fish will be ready to reproduce at day 10
+Day 2:
+	Group 3 is ready to reproduce
+	Group 2 reproduced adding 1 new fish to group 4
+	New fish will be able to reproduce at day 11
+Day 3:
+	Group 4 is ready to reproduce
+	Group 3 reproduced adding 2 new fish to group 5
+	New fish will be able to reproduce at day 12
+Day 4:
+	Group 5 is ready to reproduce
+	Group 4 reproduced adding 1 new fish to group 6
+	New fish will be able to reproduce at day 13
