@@ -25,10 +25,10 @@ if __name__ == "__main__":
         file.touch()
         with file.open("w", encoding="utf8") as writer:
             writer.write(
-                """data = None
+                f"""data = None
 p1 = 0
 p2 = 0
-with open("input.txt", "r", encoding="utf8") as reader:
+with open("{args.day}/input.txt", "r", encoding="utf8") as reader:
     data = [x.strip() for x in reader.readlines()]
 
 """
