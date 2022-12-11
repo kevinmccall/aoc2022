@@ -9,6 +9,7 @@ P1_TARGET = 100_000
 P2_TOTAL_SIZE = 70_000_000
 P2_SIZE_NEEDED = 30_000_000
 
+free_size = 0
 size_under_target = 0
 
 
@@ -50,6 +51,15 @@ class Node:
         else:
             return self.cached_size
 
+    def p2(self):
+        if free_size + self.get_size() <= P2_SIZE_NEEDED:
+            return None
+        for subdir in self.dirs.values():
+            val = subdir.p2()
+            if val is not None:
+                return val
+        return self.get_size()
+
 
 current_dir: Node = None
 head = None
@@ -71,5 +81,7 @@ for line in data:
     elif split[0].isnumeric():
         current_dir.add_file(int(split[0]))
 
-print(head.get_size())
-print(size_under_target)
+free_size = P2_TOTAL_SIZE - head.get_size()
+print(head.p2())
+
+# p2 not 1148106
