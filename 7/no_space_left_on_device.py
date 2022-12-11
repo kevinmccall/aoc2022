@@ -11,6 +11,7 @@ P2_SIZE_NEEDED = 30_000_000
 
 free_size = 0
 size_under_target = 0
+min_file = float("inf")
 
 
 class Node:
@@ -52,12 +53,15 @@ class Node:
             return self.cached_size
 
     def p2(self):
-        if free_size + self.get_size() <= P2_SIZE_NEEDED:
+        space_over = P2_SIZE_NEEDED - free_size
+        print("hit")
+        if self.get_size() < space_over:
             return None
         for subdir in self.dirs.values():
             val = subdir.p2()
             if val is not None:
-                return val
+                global min_file
+                min_file = min(min_file, val)
         return self.get_size()
 
 
@@ -82,6 +86,10 @@ for line in data:
         current_dir.add_file(int(split[0]))
 
 free_size = P2_TOTAL_SIZE - head.get_size()
-print(head.p2())
+head.p2()
+print(min_file)
+
+get_child_sizes = lambda dir: [subdir.get_size() for subdir in dir.dirs.values()]
 
 # p2 not 1148106
+# idk where this came from -> 24933642
