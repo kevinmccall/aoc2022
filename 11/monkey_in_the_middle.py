@@ -1,9 +1,10 @@
 from functools import reduce
+from math import lcm
 
 data = None
 p1 = 0
 p2 = 0
-with open("11/testinput.txt", "r", encoding="utf8") as reader:
+with open("input.txt", "r", encoding="utf8") as reader:
     data = [x.strip() for x in reader.readlines()]
 
 
@@ -33,6 +34,7 @@ def parse_operation(text):
 class Monkey:
     monkeys = []
     inspected_count = []
+    the_mod = 1
 
     def __init__(
         self, mid, starting_items, operation, test_val, true_monkey, false_monkey
@@ -43,6 +45,7 @@ class Monkey:
         self.test_val = test_val
         self.true_monkey = true_monkey
         self.false_monkey = false_monkey
+        Monkey.the_mod = lcm(Monkey.the_mod, test_val)
         Monkey.monkeys.append(self)
         Monkey.inspected_count.append(0)
 
@@ -70,7 +73,7 @@ class Monkey:
         while len(self.items) > 0:
             current = self.items.pop(0)
             # new = self.operation(current) // 3
-            new = self.operation(current)
+            new = self.operation(current) % Monkey.the_mod
             Monkey.inspected_count[self.id] += 1
             self.pass_item(new)
 
@@ -84,7 +87,7 @@ for line in data:
         _.append(line)
 
 for mround in range(10000):
-    print(f"Round: {mround}")
+    print(f"Round: {mround + 1}")
     for monkey in Monkey.monkeys:
         monkey.run()
 
