@@ -1,7 +1,7 @@
 data = None
 p1 = 0
 p2 = 0
-with open("input.txt", "r", encoding="utf8") as reader:
+with open("testinput.txt", "r", encoding="utf8") as reader:
     data = [x.strip() for x in reader.readlines()]
 
 # USE SETS -- lol
@@ -105,6 +105,7 @@ def debug_print():
 while simulate_sand():
     if sand_point in sand:
         break
-    # debug_print()
+    debug_print()
+    print()
 
 print(len(sand))
